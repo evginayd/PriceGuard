@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PriceGuard.Api/PriceGuard.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PriceGuard.Tests/PriceGuard.Tests.csproj" />
+  </Folder>
+</Solution>
