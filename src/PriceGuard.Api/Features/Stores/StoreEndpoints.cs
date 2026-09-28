@@ -13,8 +13,17 @@ public static class StoreEndpoints
             .MapGroup("/api/stores")
             .WithTags("Stores");
 
-        group.MapGet("", GetStores);
-        group.MapPost("", CreateStore);
+        group.MapGet("", GetStores)
+            .WithName("GetStores")
+            .WithSummary("Lists all supported stores.")
+            .WithDescription(
+                "Returns stores whose product URLs PriceGuard can process.");
+
+        group.MapPost("", CreateStore)
+            .WithName("CreateStore")
+            .WithSummary("Creates a supported store.")
+            .WithDescription(
+                "Registers a store domain that PriceGuard will be allowed to process.");
 
         return endpoints;
     }

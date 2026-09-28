@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PriceGuard.Api.Data;
 using PriceGuard.Api.Features.Stores;
+using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration
@@ -20,7 +21,18 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // API sözleşmesini JSON olarak yayınlar:
+    // /openapi/v1.json
     app.MapOpenApi();
+
+    // OpenAPI sözleşmesini interaktif bir arayüzde gösterir:
+    // /scalar
+    app.MapScalarApiReference(options =>
+    {
+        options
+            .WithTitle("PriceGuard API")
+            .DisableAgent();
+    });
 }
 
 app.UseHttpsRedirection();
