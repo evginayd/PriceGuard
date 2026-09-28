@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PriceGuard.Api.Data;
+using PriceGuard.Api.Features.Stores;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration
@@ -23,5 +24,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapStoreEndpoints();
 
 app.Run();
