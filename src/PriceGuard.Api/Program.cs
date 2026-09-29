@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using PriceGuard.Api.Data;
 using PriceGuard.Api.Features.Stores;
 using Scalar.AspNetCore;
+using PriceGuard.Api.Features.PriceChecks;
+using PriceGuard.Api.Scraping;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<PriceGuardDbContext>(options =>
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddSingleton<IPriceSource, FakeStorePriceSource>();
 
 var app = builder.Build();
 
@@ -37,5 +40,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapStoreEndpoints();
+app.MapPriceCheckEndpoints();
 
 app.Run();
